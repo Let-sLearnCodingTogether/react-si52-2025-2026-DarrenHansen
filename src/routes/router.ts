@@ -13,6 +13,15 @@ const router = createBrowserRouter([
                     }
                 }
             },
+            {
+                path: "add-movie",
+                lazy : {
+                    Component : async() => {
+                        const component = await import("../pages/movies/AddMovie.tsx")
+                        return component.default
+                    }
+            }
+        }
         ]
     }
 ]);
