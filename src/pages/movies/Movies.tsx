@@ -27,11 +27,37 @@ function Movies() {
         fetchMovies()
     }, [fetchMovies])
 
-    return <div className ="d-flex justify-content-between-mb-3">
-        <h2>Movie Page</h2>
-        <NavLink to="/add-movie" className="btn btn-primary">Add Movies</NavLink>
-    </div>
-}
-export default Movies
+    return (
+        <div>
+            <div className="d-flex justify-content-between mb-3">
+                <h2>Movie Page</h2>
+                <NavLink to="/add-movie" className="btn btn-primary">Add Movies</NavLink>
+            </div>
 
-//
+            <div>
+                <table className="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Judul</th>
+                            <th>Tahun Rilis</th>
+                            <th>Sutradara</th>  
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {movies.length > 0 && movies.map((movie, index) => (
+                            <tr key={movie._id}>
+                                <td>{index + 1}</td>
+                                <td>{movie.judul}</td>
+                                <td>{movie.taunRilis}</td>
+                                <td>{movie.sutradara}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    )
+}
+
+export default Movies
