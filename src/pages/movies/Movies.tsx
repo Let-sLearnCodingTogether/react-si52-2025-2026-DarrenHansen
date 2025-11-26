@@ -1,3 +1,4 @@
+
 import { useCallback, useEffect, useState } from "react"
 import { NavLink } from "react-router"
 import ApiClient from "../../utils/ApiClient"
@@ -14,12 +15,14 @@ interface Movie {
 
 function Movies() {
     const [movies, setMovies] = useState<Movie[]>([])
+    const [loading, setLoading] = useState<boolean>(true)
 
     const fetchMovies = useCallback(async () => {
         const response = await ApiClient.get("/movies")
 
         if(response.status == 200) {
             setMovies(response.data.data)
+            setLoading(false)
         }
     }, [])
 
@@ -50,6 +53,12 @@ function Movies() {
                     <th> Aksi </th>
                 </thead>
                 <tbody>
+                    {
+                        loading && <tr>
+                            <td colSpan={5}>Loading......</td>
+                        </tr>
+                    }
+                    
                     {
                         movies.length > 0 && movies.map((movie, index) =>{
                             return <tr key={movie._id}>
